@@ -41,14 +41,14 @@ module.exports = {
     open : true,//控制应用启动时自动打开浏览器
     host : '127.0.0.1',
     port : port
-    // proxy : {
-    //   '/api' : {
-    //     target : '',
-    //     changeOrigin:true,
-    //     pathRewrite : {
-    //       '^/api' : ''
-    //     }
-    //   }
-    // }
+    proxy : {
+      '/api' : {
+        target : '',
+        changeOrigin:true,
+        pathRewrite : {
+          '^/api' : ''
+        }
+      }
+    }
   }
 }
