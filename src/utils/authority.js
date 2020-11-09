@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie'
-
+import { refreshToken } from 'api/authoValidator'
 const TokenKey = 'access-token'
 export function getCookie(key){
   return Cookie.get(key)
@@ -18,4 +18,11 @@ export function setToken(token){
 }
 export function removeToken(){
   return Cookie.remove(TokenKey)
+}
+
+export function refToken(){
+  refreshToken().then(res=>{
+    setToken(res.data)
+    return
+  })
 }
