@@ -1,6 +1,22 @@
+const path = require('path')
 const port = 8090
 console.info(port)
 module.exports = {
+  configureWebpack : {
+    resolve : {
+      alias : {
+        '@' : path.resolve(__dirname,'src'),
+        'assets' : path.resolve(__dirname,'src/assets'),
+        'components' : path.resolve(__dirname,'src/components'),
+        'directive' : path.resolve(__dirname,'src/directive'),
+        'filters' : path.resolve(__dirname,'src/filters'),
+        'router' : path.resolve(__dirname,'src/router'),
+        'store' : path.resolve(__dirname,'src/store'),
+        'styles' : path.resolve(__dirname,'src/styles'),
+        'utils' : path.resolve(__dirname,'src/utils')
+      }
+    }
+  },
   //发布路径
   publicPath : './',
   //输出路径
@@ -38,12 +54,12 @@ module.exports = {
   //生产环境的productionSourceMap
   productionSourceMap : true,
   devServer : {
-    open : true,//控制应用启动时自动打开浏览器
+    open : false,//控制应用启动时自动打开浏览器
     host : '127.0.0.1',
-    port : port
+    port : port,
     proxy : {
       '/api' : {
-        target : '',
+        target : 'http://localhost:8080',
         changeOrigin:true,
         pathRewrite : {
           '^/api' : ''
