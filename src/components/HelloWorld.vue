@@ -1,60 +1,101 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div id="div1" style="height: 500px; width: 500px; border: 1px solid red; position: relative;">
+    <vdr :w="100" :h="100" @dragging="onDrag" @resizing="onResize" :parent="true" :isConflictCheck="true" :snap="true">
+      <p>Hello! I'm a flexible component. You can drag me around and you can resize me.<br>
+        X: {{ x }} / Y: {{ y }} - Width: {{ width }} / Height: {{ height }}</p>
+    </vdr>
+    <vdr 
+    :w="100" 
+    :h="100" 
+    :parent="true" 
+    :debug="false" 
+    :min-width="200" 
+    :min-height="200" 
+    :isConflictCheck="true"
+    :snap="true" 
+    :snapTolerance="20" 
+    :handles="['tm','bm','ml','mr']" 
+    axis="x" 
+    :grid="[1,1]" 
+    :onDragStart="onDragStart"
+    :onDrag="onDrag" 
+    @dragging="onDragging" 
+    @dragstop="onDragStop" 
+    :onResizeStart="onResizeStart" 
+    :onResize="onResize"
+    @resizing="onResizing" 
+    @resizestop="onResizeStop" 
+    @activated="onActivated" 
+    @deactivated="onDeactivated">
+    </vdr>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String,
-  },
-};
-</script>
+  import vdr from 'vue-draggable-resizable-gorkys'
+  import 'vue-draggable-resizable-gorkys/dist/VueDraggableResizable.css'
+  export default {
+    components: {
+      vdr
+    },
+    data: function() {
+      return {
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0
+      }
+    },
+    methods: {
+      onResize: function(x, y, width, height) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+      },
+      onDrag: function(x, y) {
+        this.x = x
+        this.y = y
+      },
+      onDragStart(ev) {
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+      },
+      onDrag() {
+
+      },
+      onDragging() {
+
+      },
+      onDragStop() {
+
+      },
+      onResizeStart() {
+
+      },
+      onResize() {
+
+      },
+      onResizing() {
+
+      },
+      onResizeStop() {
+
+      },
+      onActivated(a) {
+
+      },
+      onDeactivated() {
+
+      }
+    },
+    mounted() {
+      let div1 = document.getElementById('div1');
+      div1.addEventListener('click', function() {
+        console.log('打印第一次') //成功打印
+      })
+      div1.addEventListener('click', function() {
+        console.log('打印第二次') //成功打印
+      })
+    }
+  }
+</script>

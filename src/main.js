@@ -8,6 +8,12 @@ Vue.config.productionTip = false;
 
 Vue.use(ElementUI)
 
+import vdr from 'vue-draggable-resizable-gorkys'
+ 
+// 导入默认样式
+import 'vue-draggable-resizable-gorkys/dist/VueDraggableResizable.css'
+Vue.component('vdr', vdr)
+
 new Vue({
   router,
   store,
