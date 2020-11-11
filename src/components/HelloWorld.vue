@@ -4,28 +4,28 @@
       <p>Hello! I'm a flexible component. You can drag me around and you can resize me.<br>
         X: {{ x }} / Y: {{ y }} - Width: {{ width }} / Height: {{ height }}</p>
     </vdr>
-    <vdr 
-    :w="100" 
-    :h="100" 
-    :parent="true" 
-    :debug="false" 
-    :min-width="200" 
-    :min-height="200" 
+    <vdr
+    :w="100"
+    :h="100"
+    :parent="true"
+    :debug="false"
+    :min-width="200"
+    :min-height="200"
     :isConflictCheck="true"
-    :snap="true" 
-    :snapTolerance="20" 
-    :handles="['tm','bm','ml','mr']" 
-    axis="x" 
-    :grid="[1,1]" 
+    :snap="true"
+    :snapTolerance="20"
+    :handles="['tm','bm','ml','mr']"
+    axis="x"
+    :grid="[1,1]"
     :onDragStart="onDragStart"
-    :onDrag="onDrag" 
-    @dragging="onDragging" 
-    @dragstop="onDragStop" 
-    :onResizeStart="onResizeStart" 
+    :onDrag="onDrag"
+    @dragging="onDragging"
+    @dragstop="onDragStop"
+    :onResizeStart="onResizeStart"
     :onResize="onResize"
-    @resizing="onResizing" 
-    @resizestop="onResizeStop" 
-    @activated="onActivated" 
+    @resizing="onResizing"
+    @resizestop="onResizeStop"
+    @activated="onActivated"
     @deactivated="onDeactivated">
     </vdr>
   </div>
@@ -63,10 +63,10 @@
       onDrag() {
 
       },
-      onDragging() {
+      onDragging(x,y) {
 
       },
-      onDragStop() {
+      onDragStop(x,y) {
 
       },
       onResizeStart() {
@@ -75,10 +75,10 @@
       onResize() {
 
       },
-      onResizing() {
+      onResizing(x,y,width,height) {
 
       },
-      onResizeStop() {
+      onResizeStop(x,y,width,height) {
 
       },
       onActivated(a) {
@@ -89,13 +89,7 @@
       }
     },
     mounted() {
-      let div1 = document.getElementById('div1');
-      div1.addEventListener('click', function() {
-        console.log('打印第一次') //成功打印
-      })
-      div1.addEventListener('click', function() {
-        console.log('打印第二次') //成功打印
-      })
+      
     }
   }
 </script>
