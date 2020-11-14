@@ -36,8 +36,8 @@ module.exports = {
   lintOnSave : true,
   //是否使用浏览器内编译器，会额外增加应用负担
   runtimeCompiler : false,
-  //生产环境的productionSourceMap
-  productionSourceMap : true,
+  //影响打包速度,必须置为false
+  productionSourceMap : false,
   devServer : {
     open : false,//控制应用启动时自动打开浏览器
     host : '127.0.0.1',
