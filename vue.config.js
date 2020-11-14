@@ -2,22 +2,6 @@ const path = require('path')
 const port = 8090
 console.info(port)
 module.exports = {
-  configureWebpack : {
-    resolve : {
-      alias : {
-        '@' : path.resolve(__dirname,'src'),
-        'api' : path.resolve(__dirname,'src/api'),
-        'assets' : path.resolve(__dirname,'src/assets'),
-        'components' : path.resolve(__dirname,'src/components'),
-        'directive' : path.resolve(__dirname,'src/directive'),
-        'filters' : path.resolve(__dirname,'src/filters'),
-        'router' : path.resolve(__dirname,'src/router'),
-        'store' : path.resolve(__dirname,'src/store'),
-        'styles' : path.resolve(__dirname,'src/styles'),
-        'utils' : path.resolve(__dirname,'src/utils')
-      }
-    }
-  },
   //发布路径
   publicPath : './',
   //输出路径
@@ -68,6 +52,28 @@ module.exports = {
       }
     }
   },
+  configureWebpack : {
+    resolve : {
+      alias : {
+        '@' : path.resolve(__dirname,'src'),
+        'api' : path.resolve(__dirname,'src/api'),
+        'assets' : path.resolve(__dirname,'src/assets'),
+        'components' : path.resolve(__dirname,'src/components'),
+        'directive' : path.resolve(__dirname,'src/directive'),
+        'filters' : path.resolve(__dirname,'src/filters'),
+        'router' : path.resolve(__dirname,'src/router'),
+        'store' : path.resolve(__dirname,'src/store'),
+        'styles' : path.resolve(__dirname,'src/styles'),
+        'utils' : path.resolve(__dirname,'src/utils')
+      }
+    }
+  },
+  //使用chainWebpack将prefetch和preload关闭
+  chainWebpack : config => {
+    //删除prefetch和preload
+    config.plugins.delete('prefetch')
+    config.plugins.delete('preload')
+  },
   css : {
     loaderOptions : {
       postcss : {
@@ -76,6 +82,10 @@ module.exports = {
             remUnit : 102
           })
         }
+      },
+      //将共用的sass不必在组件一个个引入，可通过选项配置一次性引入
+      sass : {
+        data : 'styles/theme.sass'
       }
     }
   }
