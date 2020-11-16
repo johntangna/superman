@@ -61,6 +61,7 @@ module.exports = {
         'components' : path.resolve(__dirname,'src/components'),
         'directive' : path.resolve(__dirname,'src/directive'),
         'filters' : path.resolve(__dirname,'src/filters'),
+        'plugins' : path.resolve(__dirname,'src/plugins'),
         'router' : path.resolve(__dirname,'src/router'),
         'store' : path.resolve(__dirname,'src/store'),
         'styles' : path.resolve(__dirname,'src/styles'),
@@ -74,19 +75,15 @@ module.exports = {
     config.plugins.delete('prefetch')
     config.plugins.delete('preload')
   },
-  css : {
-    loaderOptions : {
-      postcss : {
-        plugins : {
+  css: {
+    loaderOptions: {
+      postcss: {
+        plugins: [
           require('postcss-px2rem')({
-            remUnit : 102
+            remUnit: 192
           })
-        }
-      },
-      //将共用的sass不必在组件一个个引入，可通过选项配置一次性引入
-      sass : {
-        data : 'styles/theme.sass'
+        ]
       }
-    }
+    },
   }
 }
