@@ -119,4 +119,31 @@ if (width / dpr > 540) {
   }
 }
 ```
-##其他页面自适应调整
+##子页面自适应调整
+>__因为转换单位为192，所有页面元素尺寸均按1920的设计稿进行赋值__
+1.img有父元素的话，img标签设置100%，父元素设置设计稿标准尺寸，否则为img标签设置设计稿标准尺寸,只需写宽度即可
+2.使用background属性时，添加background-size:100% 100%;
+3.行内样式改成页级css,不要使用style属性
+  >**包含elementui提供的方法，会将属性值直接作用到元素的_style_属性上**
+  >el-table的**height**属性，用以下方法替代
+  ```
+  /deep/  .el-table__body-wrapper{
+    overflow-y: auto;
+    height: px;
+  }
+  ```
+4.不要使用绝对定位,`fixed` | `absolute`，其他定位元素尽量不要使用**会有偏差**
+  >使用display时，尽量使用`flex` | `inline-flex`弹性布局
+5.如果子元素可以cover整个父元素，子元素宽高使用100%填充
+6.echarts元素内容宽高设置
+  >**参考第五点**
+7.echarts的定位属性不要使用
+  >**跟随父元素即可**
+```
+series : {
+  center : [],>此属性应当舍弃使用
+  radius : '',>使用比例即可
+  hoverOffset : Number >设置鼠标悬停放大偏移
+}
+```
+8.
