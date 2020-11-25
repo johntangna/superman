@@ -79,6 +79,13 @@ if (width / dpr > 540) {
 ```
 4.此时刷新页面，即可查看效果
 **提示**
+>__设置以下代码，自适应窗口__
+```
+html,body{
+  width:100%;
+  height:100%;
+}
+```
 >在body标签中，发现font-size变化会影响到整体布局
 >如果不想被转换rem，使用PX，可以规避转换
 ```
@@ -122,30 +129,43 @@ if (width / dpr > 540) {
 ##子页面自适应调整
 ###**特殊说明**
 >__因为转换单位为192，所有页面元素尺寸均按1920的设计稿进行赋值__
->__设置以下代码，自适应窗口__
-```
-html,body{
-  width:100%;
-  height:100%;
-}
-```
 >__如果想要自己转换单位，可使用下列代码__
 ```
 window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
 ```
+>__行内样式改成页级css__
+```
+包含elementui提供的方法，会将属性值直接作用到元素的style属性上，需要更改为页级css
+行内样式包含**px**单位的属性不要使用**style**，其他属性设置可以使用**style**
+```
 1.img有父元素的话，img标签设置100%，父元素设置设计稿标准尺寸，否则为img标签设置设计稿标准尺寸,只需写宽度即可
   >[说明]如果子元素可以覆盖整个父元素，父元素赋值标准宽高，子元素宽高使用100%填充
 2.使用background属性时，添加background-size:100% 100%;
-3.行内样式改成页级css
-  >**包含elementui提供的方法，会将属性值直接作用到元素的_style_属性上**，需要更改为页级css
-  >行内样式包含**px**单位的属性不要使用**_style_**设置，其他属性可以适当使用**_style_**
+3.elementui原生方法替代方案
   >el-table的**height**属性，用以下方法替代
   ```
+  #如有祖父元素，先使用flex布局
+  #表格的父元素需先使用以下代码
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  #表格再使用以下代码
   /deep/ .el-table{
     /deep/ .el-table__body-wrapper {
       overflow-y: auto;
-      height: px;
+      height: calc(100% - 54px);//54为表头高度，默认即写此值
+      position:absolute;
     }
+  }
+  ```
+  >el-form表单中的label-width属性，用以下方法替代
+  ```
+  /deep/ .el-form-item__label{
+    width: xxpx;
+  }
+  #下列代码在行内元素中不必使用
+  /deep/ .el-form-item__content{
+    margin-left: xxpx;
   }
   ```
 4.尽量不要使用绝对定位`fixed` | `absolute`
@@ -154,9 +174,7 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
   **补充内容**
   _如果想子元素自适应父级高度，且父级高度没有设置的情况下，使用此代码_
   ```
-  >只设置height百分比不会起作用，需设置绝对定位，以父级盒子高度为参照物
-  height:100%;
-  position:absolute
+  >表格的高度不设置，内部元素只设置height百分比不会起作用，需设置绝对定位，以父级盒子高度为参照物
   >如果设置flex:1不起作用,使用下列代码
   height : 0;
   flex : 1;
@@ -175,7 +193,7 @@ tooltip : {
   show : true
 },
 series : {
-  center : [],>使用比例即可
+  center : [],>使用比例即可，默认居中
   radius : '',>使用比例即可
   hoverOffset : Number >设置鼠标悬停放大偏移
 }
@@ -186,14 +204,14 @@ series : {
   ```
   #可使用下列代码进行文本最小化适应
   width: px;
-  min-width : PX;>这里最小化处理可以使用_PX_单位规避转换
+  min-width : PX;>这里最小化处理可以使用PX单位规避转换
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   ```
 9.对于设置**%**单位后，还是有误差的，使用以下代码
 ```
-#举例来说
+#响应式代码
 height : calc(100% - xxpx)
 ```
 10.对于子页面的最外层区域，使用`padding:20px`，设置区域内边距
