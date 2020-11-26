@@ -138,6 +138,11 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
 包含elementui提供的方法，会将属性值直接作用到元素的style属性上，需要更改为页级css
 行内样式包含**px**单位的属性不要使用**style**，其他属性设置可以使用**style**
 ```
+>__右侧内容最外层父元素，使用以下代码__
+```
+   #父元素设置`width:100%;height:100%`
+   对于子页面的最外层区域，使用`padding:20px`，设置区域内边距
+```
 1.img有父元素的话，img标签设置100%，父元素设置设计稿标准尺寸，否则为img标签设置设计稿标准尺寸,只需写宽度即可
   >[说明]如果子元素可以覆盖整个父元素，父元素赋值标准宽高，子元素宽高使用100%填充
 2.使用background属性时，添加background-size:100% 100%;
@@ -185,7 +190,7 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
   >4.使用盒子模型定位亦可
 5.echarts元素内容宽高设置
   >**参考第1点中的说明**
-6.echarts的定位属性不要使用
+6.echarts的定位属性尽量不要使用
   >**跟随父元素即可**
 ```
 #需要加上鼠标悬停提示，小屏幕显示难免会被覆盖
@@ -214,5 +219,25 @@ series : {
 #响应式代码
 height : calc(100% - xxpx)
 ```
-10.对于子页面的最外层区域，使用`padding:20px`，设置区域内边距
-   >父元素设置`width:100%;height:100%`
+10.卡片解决方案
+```
+#可以设置固定宽高，但是需要设置最小高度
+min-height:xxPX
+#使用flex布局，设置间距时，使用以下代码
+    //第一个不要动
+    &:first-child{
+      margin: unset !important;
+    }
+    //除了第一个，所有向右移动20px
+    &:not(:first-child){
+      margin-left: 20px;
+    }
+    //从第二行开始，向下移动20px
+    &:nth-child(n + 6){
+      margin-top: 20px;
+    }
+    //从第二行开始，每一行的第一个不要向右移动
+    &:nth-child(5n + 1){
+      margin-left: unset !important;
+    }
+```
