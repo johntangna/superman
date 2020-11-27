@@ -136,12 +136,47 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
 >__行内样式改成页级css__
 ```
 包含elementui提供的方法，会将属性值直接作用到元素的style属性上，需要更改为页级css
-行内样式包含**px**单位的属性不要使用**style**，其他属性设置可以使用**style**
+>[特殊说明]只要行内样式包含**px**单位的属性不要使用**style**，其他属性设置可以使用**style**
 ```
->__右侧内容最外层父元素，使用以下代码__
+>__页面的左侧和右侧父元素需要做调整__
 ```
-   #父元素设置`width:100%;height:100%`
-   对于子页面的最外层区域，使用`padding:20px`，设置区域内边距
+#每一个模块下的index.vue
+#头部下面的主体内容区域
+.main-model-container{
+  display:flex;//使用flex布局
+}
+#左侧列表区域
+.left-sider{
+  //固定宽
+  width:px
+  //高度为整屏高-头部高度
+  height:calc(100% - px)
+  left:0;
+  //距离头部高度
+  top : px
+  //相对正常位置的布局
+  position:relative
+}
+#右侧内容区域
+.right-item{
+  //无需设置left
+  //距离头部高度
+  top : px
+  //自适应宽度
+  flex : 1
+  //高度为整屏高-头部高度
+  height:calc(100% - px)
+  //相对正常位置的布局
+  position:relative
+}
+
+```
+>__页右侧内容最外层父元素，使用以下代码__
+```
+   #父元素设置
+   width:100%;
+   height:100%;
+   padding:20px;
 ```
 1.img有父元素的话，img标签设置100%，父元素设置设计稿标准尺寸，否则为img标签设置设计稿标准尺寸,只需写宽度即可
   >[说明]如果子元素可以覆盖整个父元素，父元素赋值标准宽高，子元素宽高使用100%填充
