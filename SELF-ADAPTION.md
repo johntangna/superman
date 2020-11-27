@@ -145,6 +145,23 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
 ```
 1.img有父元素的话，img标签设置100%，父元素设置设计稿标准尺寸，否则为img标签设置设计稿标准尺寸,只需写宽度即可
   >[说明]如果子元素可以覆盖整个父元素，父元素赋值标准宽高，子元素宽高使用100%填充
+  >[说明]使用content属性进行不同分辨率图片显示
+  ```
+  <img src="images.jpg" 
+       data-src-600px="images600px.jpg"
+       data-src-800px="images800px.jpg"
+       alt="">
+  @media (min-device-width:600px){
+    img[data-src-600px]{
+      content:attr(data-src-600px,url)
+    }
+  }
+  @media (min-device-width:800px){
+    img[data-src-800px]{
+      content:attr(data-src-800px,url)
+    }
+  }
+  ```
 2.使用background属性时，添加background-size:100% 100%;
 3.elementui原生方法替代方案
   >el-table的**height**属性，用以下方法替代
