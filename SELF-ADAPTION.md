@@ -86,7 +86,40 @@ html,body{
   height:100%;
 }
 ```
->在body标签中，发现font-size变化会影响到整体布局
+>__页面的左侧和右侧父元素需要做调整__
+```
+#每一个模块下的index.vue
+#头部下面的主体内容区域
+.main-model-container{
+  display:flex;//使用flex布局
+}
+#左侧列表区域
+.left-sider{
+  //固定宽
+  width:px
+  //高度为整屏高-头部高度
+  height:calc(100% - px)
+  left:0;
+  //距离头部高度
+  top : px
+  //相对正常位置的布局
+  position:relative
+}
+#右侧内容区域
+.right-item{
+  //无需设置left
+  //距离头部高度
+  top : px
+  //自适应宽度
+  flex : 1
+  //高度为整屏高-头部高度
+  height:calc(100% - px)
+  //相对正常位置的布局
+  position:relative
+}
+
+```
+>在body标签中，就能发现font-size变化会影响到整体布局
 >如果不想被转换rem，使用PX，可以规避转换
 ```
 #根据media媒体查询，根据不同分辨率调整body字体大小
@@ -127,49 +160,15 @@ html,body{
 }
 ```
 ##子页面自适应调整
-###**特殊说明**
->__因为转换单位为192，所有页面元素尺寸均按1920的设计稿进行赋值__
->__如果想要自己转换单位，可使用下列代码__
-```
-window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
-```
 >__行内样式改成页级css__
 ```
 包含elementui提供的方法，会将属性值直接作用到元素的style属性上，需要更改为页级css
 >[特殊说明]只要行内样式包含**px**单位的属性不要使用**style**，其他属性设置可以使用**style**
 ```
->__页面的左侧和右侧父元素需要做调整__
+>__因为转换单位为192，所有页面元素尺寸先按1920的设计稿进行赋值__
+>__如果想要自己转换单位，可使用下列代码__
 ```
-#每一个模块下的index.vue
-#头部下面的主体内容区域
-.main-model-container{
-  display:flex;//使用flex布局
-}
-#左侧列表区域
-.left-sider{
-  //固定宽
-  width:px
-  //高度为整屏高-头部高度
-  height:calc(100% - px)
-  left:0;
-  //距离头部高度
-  top : px
-  //相对正常位置的布局
-  position:relative
-}
-#右侧内容区域
-.right-item{
-  //无需设置left
-  //距离头部高度
-  top : px
-  //自适应宽度
-  flex : 1
-  //高度为整屏高-头部高度
-  height:calc(100% - px)
-  //相对正常位置的布局
-  position:relative
-}
-
+window.lib.flexible.px2rem(`${}px`)//echarts使用此方法无效
 ```
 >__页右侧内容最外层父元素，使用以下代码__
 ```
@@ -203,7 +202,7 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
   ```
   #如有祖父元素，先使用flex布局
   #表格的父元素需先使用以下代码
-  flex:1;
+  flex:1;//设置在flex布局子元素上
   display:flex;
   flex-direction:column;
   #表格再使用以下代码
@@ -220,7 +219,7 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
   /deep/ .el-form-item__label{
     width: xxpx;
   }
-  #下列代码在行内元素中不必使用
+  #下列代码在行内布局中不必使用
   /deep/ .el-form-item__content{
     margin-left: xxpx;
   }
@@ -228,23 +227,23 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
   >el-table自带的width属性不要使用，使用min-width适配最小分辨率
   `表格含有复杂嵌套时，可视具体情况布局`
 4.尽量不要使用绝对定位`fixed` | `absolute`
-  >1.使用display时，尽量使用`flex` 或者 `inline-flex`弹性布局，其所属的属性配合使用
-  >2.子页面上下布局时，其他元素设置标准高度，剩余元素可使用`flex:1`，将剩余高度自动填充
+  >1.如果一定要使用__绝对定位__，要在父元素上使用__相对定位__
+  **补充内容**
+  _可用于定位边角处,其他地方或有偏差_
+  >2.使用display时，尽量使用`flex` 或者 `inline-flex`弹性布局，其所属的属性配合使用
+  >3.子页面上下布局时，其他元素设置标准高度，剩余元素可使用`flex:1`，将剩余高度（宽度）自动填充
   **补充内容**
   _如果想子元素自适应父级高度，且父级高度没有设置的情况下，使用此代码_
   ```
-  >表格的高度不设置，内部元素只设置height百分比不会起作用，需设置绝对定位，以父级盒子高度为参照物
+  >表格的高度不设置，内部元素只设置height百分比不会起作用，需设置绝对定位，以父级盒子高度（可以继承最外层盒子）为参照物
   >如果设置flex:1不起作用,使用下列代码
   height : 0;
   flex : 1;
   ```
-  >3.如果一定要使用__绝对定位__，要在父元素上使用__相对定位__
-  **补充内容**
-  _可用于定位边角处,其他地方或有偏差_
   >4.使用盒子模型定位亦可
 5.echarts元素内容宽高设置
   >**参考第1点中的说明**
-6.echarts的定位属性尽量不要使用
+6.echarts的定位属性
   >**跟随父元素即可**
 ```
 #需要加上鼠标悬停提示，小屏幕显示难免会被覆盖
@@ -270,14 +269,14 @@ series : {
   ```
 9.对于设置**%**单位后，还是有误差的，使用以下代码
 ```
-#响应式代码
+#css函数
 height : calc(100% - xxpx)
 ```
 10.卡片解决方案
 ```
 #可以设置固定宽高，但是需要设置最小高度
 min-height:xxPX
-#使用flex布局，设置间距时，使用以下代码
+#布局使用flex布局，设置间距时，使用以下代码
     //第一个不要动
     &:first-child{
       margin: unset !important;
