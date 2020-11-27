@@ -226,7 +226,7 @@ window.lib.flexible.px2rem(`${}px`) | rem2px(`${}rem`)
   }
   ```
   >el-table自带的width属性不要使用，使用min-width适配最小分辨率
-  `表格含有复杂嵌套时，可使用弹性布局自动换行`
+  `表格含有复杂嵌套时，可视具体情况布局`
 4.尽量不要使用绝对定位`fixed` | `absolute`
   >1.使用display时，尽量使用`flex` 或者 `inline-flex`弹性布局，其所属的属性配合使用
   >2.子页面上下布局时，其他元素设置标准高度，剩余元素可使用`flex:1`，将剩余高度自动填充
