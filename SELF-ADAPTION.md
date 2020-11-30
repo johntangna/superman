@@ -14,7 +14,7 @@ npm install px2rem-loader -D
 1.在**index.html**中加入如下代码
 `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">`
 **注意点补充**
->不加以上代码，lib-flexible会自动添加，代码中事先配置
+>不加以上代码，lib-flexible会自动添加，但是需要在代码中事先配置
 2.在**vue.config.js**中配置css选项
 ```
 #在最后加上一下语句，remUnit为px2rem转换单位，以1920为标准尺寸举例，/10即可
@@ -31,11 +31,11 @@ css: {
   }
 ```
 3.在**main.js**中，顶部加上
-`import 'lib-flexible'`
+>`import 'lib-flexible'`
 **其他方式添加**
->也可在ode-module中找到lib-flexible，将其粘贴出来，放在utils文件夹中
+>也可在node-module中找到lib-flexible，将其粘贴出来，放在utils文件夹中
 ```
-#在改文件中顶部加如下代码，对个别标签进行自适应调整
+#在该文件中顶部加如下代码，对个别标签进行自适应调整
 (function() {
   // flexible.css
   let cssText =
