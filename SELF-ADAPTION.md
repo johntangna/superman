@@ -14,10 +14,10 @@ npm install px2rem-loader -D
 1.在**index.html**中加入如下代码
 `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">`
 **注意点补充**
->不加以上代码，lib-flexible会自动添加，但是需要在代码中事先配置
+>不加以上代码，lib-flexible会自动添加默认选项，但是需要在代码中事先配置代码
 2.在**vue.config.js**中配置css选项
 ```
-#在最后加上一下语句，remUnit为px2rem转换单位，以1920为标准尺寸举例，/10即可
+#在最后加上以下语句，remUnit为px2rem转换单位，以1920为标准尺寸举例，1920/10即可
 css: {
     loaderOptions: {
       postcss: {
@@ -72,7 +72,7 @@ css: {
     }
   }
 })();
-#找到refreshRem函数,改成如下代码，代码默认最小为540px
+#找到refreshRem函数,改成如下代码，代码自适应默认最小为540px，将其改成自适应任意屏幕尺寸
 if (width / dpr > 540) {
       width = width * dpr;
     }
@@ -96,12 +96,12 @@ html,body{
 #左侧列表区域
 .left-sider{
   //固定宽
-  width:px
+  width:110px
   //高度为整屏高-头部高度
-  height:calc(100% - px)
+  height:calc(100% - 110px)
   left:0;
   //距离头部高度
-  top : px
+  top : 80px
   //相对正常位置的布局
   position:relative
 }
@@ -109,7 +109,7 @@ html,body{
 .right-item{
   //无需设置left
   //距离头部高度
-  top : px
+  top : 80px
   //自适应宽度
   flex : 1
   //高度为整屏高-头部高度
