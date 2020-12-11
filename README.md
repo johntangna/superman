@@ -32,3 +32,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 [npm](https://www.npmjs.com/package/vue-draggable-resizable-gorkys)
 [npm-chinese](chinese (https://tingtas.com/vue-draggable-resizable-gorkys/?path=/story/%E5%9F%BA%E6%9C%AC--%E5%9F%BA%E6%9C%AC%E7%BB%84%E4%BB%B6))
 [scratch-desktop](https://github.com/LLK/scratch-desktop.git)
+[scratch-gui](https://github.com/LLK/scratch-gui)
