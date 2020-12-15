@@ -200,7 +200,13 @@ window.lib.flexible.px2rem(`${}px`)//echarts使用此方法无效
     }
   }
   ```
-2.使用background属性时，添加background-size:100% 100%;
+2.使用background属性时
+  ```
+  #按照父区域的大小进行填充
+  1.background-size:100% 100%
+  #按照宽度进行自适应区域
+  2.background-size:contain
+  ```
 3.elementui原生方法替代方案
   >el-table的**height**属性，用以下方法替代
   ```
