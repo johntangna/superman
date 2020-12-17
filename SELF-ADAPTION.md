@@ -249,7 +249,7 @@ window.lib.flexible.px2rem(`${}px`)//echarts使用此方法无效
   >如果设置flex:1不起作用,使用下列代码
   height : 0;
   flex : 1;
-  >因为对table标签设置flex:1不起作用，需将table标签放置div元素中
+  >因为对table标签设置flex:1不起作用，需将table标签放置div元素中,div元素作为父元素必须设置高度
   ```
   >4.使用盒子模型定位亦可
 5.echarts元素内容宽高设置
