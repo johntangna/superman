@@ -288,20 +288,14 @@ height : calc(100% - xxpx)
 #可以设置固定宽高，但是需要设置最小高度
 min-height:xxPX
 #布局使用flex布局，设置间距时，使用以下代码
-    //第一个不要动
-    &:first-child{
-      margin: unset !important;
-    }
-    //除了第一个，所有向右移动20px
-    &:not(:first-child){
+    //除了每一行第一个，所有向右移动20px
+    //这里5假设一行5个，n从0开始取值
+    &:not(:nth-child(5n + 1)){
       margin-left: 20px;
     }
     //从第二行开始，向下移动20px
+    //这里6表示一行个数+1
     &:nth-child(n + 6){
       margin-top: 20px;
-    }
-    //从第二行开始，每一行的第一个不要向右移动
-    &:nth-child(5n + 1){
-      margin-left: unset !important;
     }
 ```
