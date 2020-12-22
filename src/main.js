@@ -11,7 +11,15 @@ import vdr from 'vue-draggable-resizable-gorkys'
 // 导入默认样式
 import 'vue-draggable-resizable-gorkys/dist/VueDraggableResizable.css'
 Vue.component('vdr', vdr)
-
+const i18n = (Vue)=>{
+  install(Vue){
+    Vue.prototype.$i18n = Vue
+  }
+}
+const option = {
+  
+}
+Vue.use(i18n,option)
 new Vue({
   router,
   store,
