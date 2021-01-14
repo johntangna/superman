@@ -5,7 +5,12 @@ Vue.use(Vuex);
 const files = require.context('./modules',false,/\.js$/)
 const modules = {}
 files.keys().forEach((Key)=>{
-	modules[key.replace(/(\.\/|\.js)/g,'')] = files(key).default
+	if(key === "./index.js") return
+  const moduleName = key.replace(/(\.\/|\.js)/g,'')
+  modules[moduleName] = {
+    namespaced : true,
+    ...requireModule(key)
+  }
 })
 export default new Vuex.Store({
   state: {
