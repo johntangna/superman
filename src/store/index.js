@@ -2,7 +2,11 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-
+const files = require.context('./modules',false,/\.js$/)
+const modules = {}
+files.keys().forEach((Key)=>{
+	modules[key.replace(/(\.\/|\.js)/g,'')] = files(key).default
+})
 export default new Vuex.Store({
   state: {
   },
@@ -10,6 +14,5 @@ export default new Vuex.Store({
   },
   actions: {
   },
-  modules: {
-  },
+  modules
 });
