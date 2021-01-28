@@ -1,4 +1,4 @@
-const user = {
+const default {
   state : {
     
   },
@@ -12,4 +12,3 @@ const user = {
     
   }
 }
-export default user

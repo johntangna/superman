@@ -9,10 +9,13 @@ files.keys().forEach((Key)=>{
   const moduleName = key.replace(/(\.\/|\.js)/g,'')
   modules[moduleName] = {
     namespaced : true,
-    ...requireModule(key)
+    ...requireModule(key).default
   }
 })
 export default new Vuex.Store({
+  modules : {
+    ...modules
+  }
   state: {
   },
   mutations: {
